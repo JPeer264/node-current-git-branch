@@ -13,7 +13,7 @@ test('check if the given directory is the branch master', (t) => {
   t.plan(1);
 
   if (isCi) {
-    t.is(branchName(path.join(fixtures, 'master')).slice(0, 14, '(HEAD detached'));
+    t.is(branchName(path.join(fixtures, 'master')).slice(0, 14), '(HEAD detached');
   } else {
     t.is(branchName(path.join(fixtures, 'master')), 'master');
   }
@@ -23,7 +23,7 @@ test('check if the given directory is the branch feat/test', (t) => {
   t.plan(1);
 
   if (isCi) {
-    t.is(branchName(path.join(fixtures, 'feat_test')).slice(0, 14, '(HEAD detached'));
+    t.is(branchName(path.join(fixtures, 'feat_test')).slice(0, 14), '(HEAD detached');
   } else {
     t.is(branchName(path.join(fixtures, 'feat_test')), 'feat/test');
   }
