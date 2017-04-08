@@ -36,7 +36,8 @@
   },
   "nyc": {
     "exclude": [
-      "build.js"
+      "build.js",
+      "test.js"
     ]
   },
   "homepage": "https://github.com/JPeer264/node-current-git-branch#readme",
