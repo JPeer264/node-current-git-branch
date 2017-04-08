@@ -3,29 +3,30 @@ import test from 'ava';
 import path from 'path';
 import execa from 'execa';
 import fs from 'fs-extra';
+import isCi from 'is-ci';
 
 import branchName from './index';
 
 const fixtures = 'test/fixtures';
 
 test('check if the given directory is the branch master', (t) => {
-  const headPath = path.join(fixtures, 'master', '.git', 'HEAD');
+  t.plan(1);
 
-  fs.writeFileSync(headPath, 'ref: refs/heads/master');
-
-  const headFile = fs.readFileSync(headPath, 'utf8').replace(/\n/, '');
-
-  t.is(branchName(path.join(fixtures, 'master')), headFile.slice(16, headFile.length));
+  if (isCi) {
+    t.is(branchName(path.join(fixtures, 'master')).slice(0, 14, '(HEAD detached'));
+  } else {
+    t.is(branchName(path.join(fixtures, 'master')), 'master');
+  }
 });
 
 test('check if the given directory is the branch feat/test', (t) => {
-  const headPath = path.join(fixtures, 'master', '.git', 'HEAD');
+  t.plan(1);
 
-  fs.writeFileSync(headPath, 'ref: refs/heads/feat/test');
-
-  const headFile = fs.readFileSync(path.join(fixtures, 'feat_test', '.git', 'HEAD'), 'utf8').replace(/\n/, '');
-
-  t.is(branchName(path.join(fixtures, 'feat_test')), headFile.slice(16, headFile.length));
+  if (isCi) {
+    t.is(branchName(path.join(fixtures, 'feat_test')).slice(0, 14, '(HEAD detached'));
+  } else {
+    t.is(branchName(path.join(fixtures, 'feat_test')), 'feat/test');
+  }
 });
 
 test('check the branch name of the home dir', (t) => {
