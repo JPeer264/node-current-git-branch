@@ -43,7 +43,6 @@
   "homepage": "https://github.com/JPeer264/node-current-git-branch#readme",
   "dependencies": {
     "execa": "^0.6.1",
-    "is-ci": "^1.0.10",
     "is-git-repository": "^1.0.0"
   },
   "devDependencies": {
@@ -56,6 +55,7 @@
     "eslint-plugin-import": "^2.2.0",
     "fs-extra": "^2.1.2",
     "husky": "^0.13.2",
+    "is-ci": "^1.0.10",
     "nyc": "^10.1.2"
   }
 }
