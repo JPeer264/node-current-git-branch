@@ -1,6 +1,8 @@
 # current-git-branch
 
-[![Build Status](https://travis-ci.org/JPeer264/node-current-git-branch.svg?branch=master)](https://travis-ci.org/JPeer264/node-current-git-branch) [![Coverage Status](https://coveralls.io/repos/github/JPeer264/node-current-git-branch/badge.svg?branch=master)](https://coveralls.io/github/JPeer264/node-current-git-branch?branch=master)
+[![Build Status](https://travis-ci.org/JPeer264/node-current-git-branch.svg?branch=master)](https://travis-ci.org/JPeer264/node-current-git-branch)
+[![Build status](https://ci.appveyor.com/api/projects/status/ehj6762gbj1e2qyc?svg=true)](https://ci.appveyor.com/project/JPeer264/node-current-git-branch)
+[![Coverage Status](https://coveralls.io/repos/github/JPeer264/node-current-git-branch/badge.svg?branch=master)](https://coveralls.io/github/JPeer264/node-current-git-branch?branch=master)
 
 Get synchronously the current branch name
 
