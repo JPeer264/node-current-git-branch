@@ -42,6 +42,7 @@
   },
   "homepage": "https://github.com/JPeer264/node-current-git-branch#readme",
   "dependencies": {
+    "babel-plugin-add-module-exports": "^0.2.1",
     "execa": "^0.6.1",
     "is-git-repository": "^1.0.0"
   },
