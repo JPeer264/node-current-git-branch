@@ -5,7 +5,7 @@ import path from 'path';
 
 import branchName from './index';
 
-const fixtures = 'test/fixtures';
+const fixtures = path.join(process.cwd(), 'test', 'fixtures');
 
 const folders = [
   'feat_test',
