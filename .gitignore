@@ -3,3 +3,4 @@ build.js
 .nyc_output
 npm-debug.log
 coverage
+.DS_Store
