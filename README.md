@@ -26,7 +26,8 @@ Returns:
 const branchName = require('current-git-branch');
 
 branchName(); // false or branch name of process.cwd()
-branchName('any/git/repo'); // false or branch name of the directory 'any/git/repo'
+branchName({ altPath: 'any/git/repo' }); // false or branch name of the directory 'any/git/repo'
+branchName({ altPath: 'any/git/repo', branchOptions: [ "--no-color" ] }); // alternatively, you may pass git-branch command options, either as a string or an array
 ```
 
 ## LICENSE
