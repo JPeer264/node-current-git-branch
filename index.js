@@ -13,7 +13,7 @@ const isGitAdded = (options = defaultOptions) => {
   if (!isGit(options.altPath)) {
     return false;
   }
-  const branchOptions = options.branchOptions ? Array.isArray(options.branchOptions) ? options.branchOptions.join(' ') : options.branchOptions : '';
+  const branchOptions = options.branchOptions && Array.isArray(options.branchOptions) ? options.branchOptions.join(' ') : options.branchOptions || '';
   try {
     let cmd = '';
 
