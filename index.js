@@ -3,21 +3,24 @@ import execa from 'execa';
 import isGit from 'is-git-repository';
 
 const cwd = process.cwd();
-
-const isGitAdded = (altPath = cwd) => {
+const defaultOptions = {
+  altPath: cwd,
+  branchOptions: null,
+};
+const isGitAdded = (options = defaultOptions) => {
   let stdout;
 
-  if (!isGit(altPath)) {
+  if (!isGit(options.altPath)) {
     return false;
   }
-
+  const branchOptions = options.branchOptions && Array.isArray(options.branchOptions) ? options.branchOptions.join(' ') : options.branchOptions || '';
   try {
     let cmd = '';
 
     if (platform() === 'win32') {
-      cmd = `pushd ${altPath} & git branch | findstr \\*`;
+      cmd = `pushd ${options.altPath || cwd} & git branch ${branchOptions} | findstr \\*`;
     } else {
-      cmd = `(cd ${altPath} ; git branch | grep \\*)`;
+      cmd = `(cd ${options.altPath || cwd} ; git branch ${branchOptions} | grep \\*)`;
     }
 
     stdout = execa.shellSync(cmd).stdout;

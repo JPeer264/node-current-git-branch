@@ -21,13 +21,13 @@ test.after.always('rename .git folders', () => {
 });
 
 test('check if the given directory is the branch master', (t) => {
-  t.is(branchName(path.join(fixtures, 'master')), 'master');
+  t.is(branchName({ altPath: path.join(fixtures, 'master'), branchOptions: '--no-color' }), 'master');
 });
 
 test('check if the given directory is the branch feat/test', (t) => {
-  t.is(branchName(path.join(fixtures, 'feat_test')), 'feat_test');
+  t.is(branchName({ altPath: path.join(fixtures, 'feat_test'), branchOptions: '--no-color' }), 'feat_test');
 });
 
 test('check the branch name of the home dir', (t) => {
-  t.false(branchName(homedir()));
+  t.false(branchName({ altPath: homedir(), branchOptions: '--no-color' }));
 });
