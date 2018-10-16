@@ -1,3 +1,13 @@
+1.1.0 - October, 16 2018
+
+* 164bdb9 Chore: drop support for Node v4 (#2) (Jan Peer Stöcklmair)
+* 7d6bddc Ability to pass options to `git-branch` command (#1) (Ryan Stimmler)
+* 5a2b4ea 1.0.1 (JPeer264)
+* fee095b Test: update fixtures (JPeer264)
+* 190593d 1.0.1 (JPeer264)
+* f4aba3c Feat: add test folder (JPeer264)
+* b014237 Feat: remove test folder (JPeer264)
+
 1.0.1 - December, 18 2017
 
 * f4aba3c Feat: add test folder (JPeer264)
