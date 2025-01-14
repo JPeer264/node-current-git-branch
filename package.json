@@ -2,15 +2,17 @@
   "name": "current-git-branch",
   "version": "1.1.0",
   "description": "A tool to check if files are added in a git repository",
-  "main": "build.js",
+  "type": "module",
+  "exports": {
+    "types": "./index.d.ts",
+    "default": "./index.js"
+  },
   "scripts": {
-    "pretest": "npm run lint",
-    "test": "nyc ava",
-    "lint": "eslint index.js test.js",
-    "coveralls": "nyc report --reporter=text-lcov | coveralls",
-    "prepublish": "npm run babel",
-    "babel": "babel index.js -o build.js",
-    "prepush": "npm test"
+    "test": "vitest run . --coverage --coverage.reporter lcov",
+    "lint": "eslint index.js index.spec.js",
+    "prettier:check": "prettier --check .",
+    "prettier:format": "prettier --write .",
+    "coveralls": "cat ./coverage/lcov.info | coveralls"
   },
   "repository": {
     "type": "git",
@@ -30,32 +32,17 @@
   "bugs": {
     "url": "https://github.com/JPeer264/node-current-git-branch/issues"
   },
-  "ava": {
-    "require": "babel-register",
-    "babel": "inherit"
-  },
-  "nyc": {
-    "exclude": [
-      "build.js",
-      "test.js"
-    ]
-  },
   "homepage": "https://github.com/JPeer264/node-current-git-branch#readme",
   "dependencies": {
-    "babel-plugin-add-module-exports": "^0.2.1",
-    "execa": "^0.6.1",
-    "is-git-repository": "^1.0.0"
+    "is-git-repository": "^3.0.0"
   },
   "devDependencies": {
-    "ava": "^0.18.2",
-    "babel-cli": "^6.24.0",
-    "babel-preset-env": "^1.2.2",
-    "coveralls": "^2.12.0",
-    "eslint": "^3.18.0",
-    "eslint-config-airbnb-base": "^11.1.1",
-    "eslint-plugin-import": "^2.2.0",
-    "fs-extra": "^2.1.2",
-    "husky": "^0.13.2",
-    "nyc": "^10.1.2"
+    "@eslint/js": "^9.18.0",
+    "@vitest/coverage-v8": "^2.1.8",
+    "coveralls": "^3.1.1",
+    "eslint": "^9.18.0",
+    "eslint-config-prettier": "^10.0.1",
+    "prettier": "^3.4.2",
+    "vitest": "^2.1.8"
   }
 }

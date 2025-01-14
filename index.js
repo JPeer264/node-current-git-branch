@@ -1,36 +1,38 @@
-import { platform } from 'os';
-import execa from 'execa';
-import isGit from 'is-git-repository';
+import isGit from "is-git-repository";
+import process from "node:process";
+import { execSync } from "child_process";
 
 const cwd = process.cwd();
 const defaultOptions = {
-  altPath: cwd,
+  cwd,
   branchOptions: null,
 };
-const isGitAdded = (options = defaultOptions) => {
-  let stdout;
 
-  if (!isGit(options.altPath)) {
-    return false;
-  }
-  const branchOptions = options.branchOptions && Array.isArray(options.branchOptions) ? options.branchOptions.join(' ') : options.branchOptions || '';
-  try {
-    let cmd = '';
+const sanitize = (input) => {
+  if (!Array.isArray(input)) return input.replace(/[^a-zA-Z0-9-_]/g, "");
 
-    if (platform() === 'win32') {
-      cmd = `pushd ${options.altPath || cwd} & git branch ${branchOptions} | findstr \\*`;
-    } else {
-      cmd = `(cd ${options.altPath || cwd} ; git branch ${branchOptions} | grep \\*)`;
-    }
-
-    stdout = execa.shellSync(cmd).stdout;
-  } catch (e) {
-    return false;
-  }
-
-  const branchName = stdout.slice(2, stdout.length);
-
-  return branchName;
+  return input.map(sanitize).join(" ");
 };
 
-export default isGitAdded;
+const branchName = (options = defaultOptions) => {
+  if (!isGit(options.cwd)) {
+    return false;
+  }
+
+  const branchOptions = sanitize(options.branchOptions);
+
+  try {
+    const cmd = `git branch ${branchOptions}`;
+
+    return execSync(cmd.trim(), {
+      cwd: options.cwd ?? cwd,
+    })
+      .toString()
+      .substring(2)
+      .trim();
+  } catch {
+    return false;
+  }
+};
+
+export default branchName;
