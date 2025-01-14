@@ -1,3 +1,7 @@
+2.0.0 - January, 14 2025
+
+* 3122f4f Feat: add ESM | modernise the project (JPeer264)
+
 1.1.0 - October, 16 2018
 
 - 164bdb9 Chore: drop support for Node v4 (#2) (Jan Peer Stöcklmair)
