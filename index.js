@@ -26,13 +26,12 @@ const branchName = (options = defaultOptions) => {
   const branchOptions = sanitize(options.branchOptions);
 
   try {
-    const cmd = `git branch ${branchOptions}`;
+    const cmd = `git branch --show-current ${branchOptions}`;
 
     return execSync(cmd.trim(), {
       cwd: options.cwd ?? cwd,
     })
       .toString()
-      .substring(2)
       .trim();
   } catch {
     return false;
