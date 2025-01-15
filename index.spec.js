@@ -4,12 +4,23 @@ import path from "node:path";
 import process from "node:process";
 
 import branchName from "./index";
-import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import {
+  afterAll,
+  beforeAll,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  vi,
+} from "vitest";
+import { execSync } from "node:child_process";
 
 const cwd = process.cwd();
 const fixtures = path.join(cwd, "test", "fixtures");
 
 const folders = ["feat_test", "master"];
+
+vi.mock("node:child_process", { spy: true });
 
 describe("branchName", () => {
   beforeAll(() => {
@@ -21,6 +32,10 @@ describe("branchName", () => {
     );
   });
 
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
   afterAll(() => {
     folders.map((folder) =>
       fs.renameSync(
@@ -28,6 +43,25 @@ describe("branchName", () => {
         path.join(fixtures, folder, "git"),
       ),
     );
+  });
+
+  it("check the default", () => {
+    branchName();
+
+    expect(execSync).toHaveBeenCalledWith("git branch", { cwd });
+  });
+
+  it("check if values are properly ignored", () => {
+    branchName({ cwd: path.join(fixtures, "master"), branchOptions: [] });
+    branchName({ branchOptions: [null, 0, "--no-color"] });
+
+    expect(execSync).toHaveBeenCalledTimes(2);
+    expect(execSync).toHaveBeenNthCalledWith(1, "git branch", {
+      cwd: path.join(fixtures, "master"),
+    });
+    expect(execSync).toHaveBeenNthCalledWith(2, "git branch --no-color", {
+      cwd,
+    });
   });
 
   it("check if the given directory is the branch master", () => {
@@ -52,5 +86,9 @@ describe("branchName", () => {
     expect(branchName({ cwd: homedir(), branchOptions: "--no-color" })).toBe(
       false,
     );
+  });
+
+  it("check any non existing dir", () => {
+    expect(branchName({ cwd: "ʕっ•ᴥ•ʔっ" })).toBe(false);
   });
 });

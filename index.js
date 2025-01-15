@@ -1,6 +1,6 @@
 import isGit from "is-git-repository";
 import process from "node:process";
-import { execSync } from "child_process";
+import { execSync } from "node:child_process";
 
 const cwd = process.cwd();
 const defaultOptions = {
@@ -9,9 +9,13 @@ const defaultOptions = {
 };
 
 const sanitize = (input) => {
-  if (!Array.isArray(input)) return input.replace(/[^a-zA-Z0-9-_]/g, "");
+  if (Array.isArray(input)) return input.map(sanitize).join(" ").trim();
 
-  return input.map(sanitize).join(" ");
+  if (typeof input !== "string") {
+    return "";
+  }
+
+  return input?.replace(/[^a-zA-Z0-9-_]/g, "");
 };
 
 const branchName = (options = defaultOptions) => {
