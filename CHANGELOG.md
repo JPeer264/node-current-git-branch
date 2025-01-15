@@ -1,3 +1,9 @@
+2.0.1 - January, 15 2025
+
+* 1723789 Fix: show the current branch when multiple branches are set (ref: #4) (JPeer264)
+* ba79b24 Fix: do not fail when arguments are empty (fixes: #4) (JPeer264)
+* 1da5c82 Fix: prettier ignore changelog.md (JPeer264)
+
 2.0.0 - January, 14 2025
 
 * 3122f4f Feat: add ESM | modernise the project (JPeer264)
