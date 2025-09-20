@@ -1,6 +1,6 @@
 {
   "name": "current-git-branch",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "A tool to check if files are added in a git repository",
   "type": "module",
   "exports": {

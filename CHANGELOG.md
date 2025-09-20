@@ -1,3 +1,7 @@
+2.0.2 - September, 20 2025
+
+* 2a817d9 fix: correct return type (#5) (Evan Jacobs)
+
 2.0.1 - January, 15 2025
 
 * 1723789 Fix: show the current branch when multiple branches are set (ref: #4) (JPeer264)
